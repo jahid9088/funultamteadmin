@@ -1,433 +1,490 @@
---- START OF FILE ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>⚡ ULTRA ADMIN | ULTIMATE MAX PRO</title>
+  <title>💎 CYBER ADMIN | PREMIUM MAX</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap');
 
     :root {
-      --bg: #010409;
-      --surface: #0d1117;
-      --card: #161b22;
-      --accent: #58a6ff;
-      --accent-glow: rgba(88, 166, 255, 0.15);
-      --text: #c9d1d9;
-      --text-bright: #ffffff;
-      --text-dim: #8b949e;
-      --danger: #f85149;
-      --success: #238636;
-      --owner: #d29922;
-      --border: #30363d;
+      --bg: #03000a;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --accent: #8b5cf6;
+      --accent-glow: #6d28d9;
+      --cyan: #06b6d4;
+      --danger: #ff4d4d;
+      --text: #e2e8f0;
+      --owner: #fbbf24;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--text); overflow-x: hidden; }
-
-    /* --- TOP MULTI-DB NAV --- */
-    .db-container {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 2000; padding: 0.8rem;
-      display: flex; gap: 0.8rem; overflow-x: auto; scrollbar-width: none;
-    }
-    .db-container::-webkit-scrollbar { display: none; }
     
-    .db-card {
-      background: var(--card); border: 1px solid var(--border);
-      padding: 0.7rem 1.2rem; border-radius: 14px; min-width: 140px;
-      position: relative; transition: 0.3s;
-    }
-    .db-card.active { border-color: var(--accent); background: rgba(88, 166, 255, 0.05); }
-    .db-card .db-title { font-weight: 800; font-size: 0.85rem; color: var(--text-bright); display: block; }
-    .db-card .db-count { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
-    .db-card .db-actions { position: absolute; top: 5px; right: 8px; display: flex; gap: 5px; opacity: 0.3; }
-    .db-card:hover .db-actions { opacity: 1; }
-    .action-icon { font-size: 0.7rem; cursor: pointer; color: var(--text-dim); }
-
-    .add-btn {
-      min-width: 50px; background: var(--success); border-radius: 14px;
-      display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff;
+    body { 
+      background: var(--bg); 
+      color: var(--text); 
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #03000a 100%);
+      min-height: 100vh;
     }
 
-    /* --- DASHBOARD --- */
-    header { padding: 1.5rem 1.2rem 0.5rem 1.2rem; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { font-size: 1.4rem; font-weight: 900; background: linear-gradient(to right, #58a6ff, #bc8cff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; padding: 1.2rem; }
-    .stat-box { background: var(--card); border: 1px solid var(--border); padding: 1.2rem; border-radius: 20px; }
-    .stat-box span { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-    .stat-box h2 { font-size: 1.5rem; color: var(--text-bright); margin-top: 5px; }
-
-    /* --- BATCH ENGINE --- */
-    .engine-box {
-      margin: 0 1.2rem 1.5rem 1.2rem; background: #0d1117; 
-      border-radius: 24px; padding: 1.5rem; border: 1px solid var(--border);
+    /* --- PREMIUM LOADER --- */
+    #main-loader {
+      position: fixed; inset: 0; background: var(--bg); z-index: 10000;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .select-pro {
-      width: 100%; background: #010409; border: 1px solid var(--border);
-      color: #fff; padding: 0.8rem; border-radius: 12px; margin-bottom: 1.2rem; outline: none;
+    .cyber-ring {
+      width: 60px; height: 60px; border: 2px solid var(--glass-border);
+      border-top: 2px solid var(--accent); border-radius: 50%;
+      animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* --- CYBER TOP BAR --- */
+    .top-nav {
+      position: sticky; top: 0; z-index: 1000;
+      padding: 1rem; background: rgba(3, 0, 10, 0.6);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
+      display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+
+    .admin-pill {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      padding: 0.6rem 1.2rem; border-radius: 16px; min-width: 130px;
+      position: relative; transition: 0.4s; flex-shrink: 0;
+    }
+    .admin-pill.active {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+    .admin-pill .name { font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 2px; }
+    .admin-pill .count { font-size: 0.7rem; color: var(--cyan); font-weight: 600; font-family: 'Space Grotesk'; }
+    
+    .pill-actions { position: absolute; top: 5px; right: 8px; display: flex; gap: 6px; opacity: 0; transition: 0.3s; }
+    .admin-pill:hover .pill-actions { opacity: 1; }
+    .icon-btn { font-size: 0.7rem; color: var(--text); cursor: pointer; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 4px; }
+
+    /* --- LUXURY CARDS --- */
+    .dashboard { padding: 1.5rem; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .logo-glow { 
+      font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.5rem;
+      background: linear-gradient(to right, #fff, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
     }
 
-    .btn-row { display: flex; gap: 0.6rem; }
-    .btn { padding: 0.8rem; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; flex: 1; transition: 0.2s; }
-    .btn-danger { background: rgba(248, 81, 73, 0.1); color: #ff7b72; border: 1px solid rgba(248, 81, 73, 0.2); }
-    .btn-accent { background: var(--accent); color: #0d1117; }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      padding: 1.2rem; border-radius: 24px; backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+    .stat-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+    .stat-card span { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+    .stat-card h2 { font-size: 1.8rem; font-family: 'Space Grotesk'; margin-top: 5px; color: #fff; }
 
-    /* --- SEARCH & VIRTUAL LIST --- */
-    .search-area { padding: 0 1.2rem 1.2rem 1.2rem; position: sticky; top: 80px; z-index: 1000; background: var(--bg); }
+    /* --- ACTION ENGINE --- */
+    .engine-panel {
+      background: rgba(139, 92, 246, 0.05); border: 1px solid var(--glass-border);
+      border-radius: 30px; padding: 1.5rem; margin-bottom: 1.5rem;
+    }
+    .premium-select {
+      width: 100%; background: #000; border: 1px solid var(--glass-border);
+      color: #fff; padding: 1rem; border-radius: 15px; margin-bottom: 1.2rem;
+      font-size: 1rem; outline: none; transition: 0.3s;
+    }
+    .premium-select:focus { border-color: var(--accent); }
+
+    .btn-group { display: flex; gap: 0.8rem; }
+    .btn {
+      padding: 1rem; border-radius: 15px; border: none; font-weight: 700;
+      cursor: pointer; transition: 0.3s; flex: 1; font-size: 0.9rem;
+    }
+    .btn-danger { background: rgba(255, 77, 77, 0.1); color: var(--danger); border: 1px solid rgba(255, 77, 77, 0.2); }
+    .btn-danger:active { background: var(--danger); color: #fff; }
+    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
+
+    /* --- SEARCH & LIST --- */
+    .search-wrapper { margin-bottom: 1.2rem; position: sticky; top: 90px; z-index: 900; }
     .search-input {
-      width: 100%; background: var(--card); border: 1px solid var(--border);
-      padding: 1.1rem; border-radius: 16px; color: #fff; font-size: 1rem; outline: none;
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+      padding: 1.2rem; border-radius: 20px; color: #fff; backdrop-filter: blur(10px);
+      outline: none; transition: 0.3s;
     }
-    .search-input:focus { border-color: var(--accent); }
+    .search-input:focus { background: rgba(255,255,255,0.08); border-color: var(--accent); }
 
-    .ultra-list { margin: 0 1.2rem; border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--border); }
-    .row { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border); animation: slideUp 0.3s ease; }
-    @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } }
+    .list-container { border-radius: 28px; overflow: hidden; background: var(--glass); border: 1px solid var(--glass-border); }
+    .user-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem; border-bottom: 1px solid var(--glass-border);
+      transition: 0.3s; animation: reveal 0.4s ease-out;
+    }
+    @keyframes reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     
-    .u-mob { font-weight: 800; color: var(--text-bright); font-size: 1.05rem; }
-    .u-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
-    .badge { font-size: 0.6rem; padding: 3px 6px; border-radius: 5px; font-weight: 900; vertical-align: middle; }
-    .badge-owner { background: var(--owner); color: #000; }
+    .u-mob { font-weight: 700; font-size: 1.1rem; color: #fff; display: block; }
+    .u-info { font-size: 0.8rem; color: #94a3b8; margin-top: 3px; display: flex; align-items: center; gap: 8px; }
+    
+    .badge-owner { background: var(--owner); color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+    .del-btn { background: rgba(255, 77, 77, 0.1); color: var(--danger); border: none; padding: 8px 15px; border-radius: 10px; font-weight: 700; font-size: 0.75rem; }
 
-    /* --- OVERLAYS --- */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 5000; padding: 1.5rem; backdrop-filter: blur(10px); }
+    /* --- MODALS --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(15px); display: none; align-items: center;
+      justify-content: center; z-index: 5000; padding: 1.5rem;
+    }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: var(--card); padding: 2rem; border-radius: 30px; width: 100%; max-width: 400px; border: 1px solid var(--border); }
+    .modal-content {
+      background: #111; border: 1px solid var(--glass-border);
+      padding: 2.5rem; border-radius: 35px; width: 100%; max-width: 400px;
+      animation: modalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes modalSlide { from { transform: translateY(30px) scale(0.9); opacity: 0; } }
 
-    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 800; opacity: 0; z-index: 9999; transition: 0.3s; }
-    .toast.show { opacity: 1; bottom: 40px; }
+    .progress-track { height: 8px; background: #000; border-radius: 10px; margin: 20px 0; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 15px var(--accent); transition: 0.3s; }
 
-    .fab { position: fixed; bottom: 30px; right: 25px; width: 60px; height: 60px; background: var(--accent); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #000; font-size: 2rem; z-index: 1001; box-shadow: 0 10px 25px var(--accent-glow); }
+    .fab {
+      position: fixed; bottom: 30px; right: 25px;
+      width: 65px; height: 65px; background: var(--accent);
+      border-radius: 22px; display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 2rem;
+      box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4); z-index: 1000;
+    }
+
+    .toast {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #fff; padding: 1rem 2rem;
+      border-radius: 20px; font-weight: 700; z-index: 9999;
+      transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .toast.show { top: 30px; }
   </style>
 </head>
 <body>
 
-<div id="dbListNav" class="db-container">
-  <!-- DB Cards Dynamic -->
-  <div class="add-btn" onclick="openModal('dbAddModal')">+</div>
+<div id="main-loader"><div class="cyber-ring"></div></div>
+
+<div class="top-nav" id="dbTabs">
+  <button class="btn btn-accent" style="width:auto; padding:0 15px; border-radius:15px;" onclick="openModal('addDbModal')">+</button>
 </div>
 
-<header>
-  <div class="brand-logo">ULTRA MAX PRO</div>
-  <button class="btn btn-accent" style="width:auto; padding:0.5rem 1.2rem; font-size:0.7rem;" onclick="exportCSV()">CSV EXPORT</button>
-</header>
+<div class="dashboard">
+  <header>
+    <div class="logo-glow">CYBER ADMIN PRO</div>
+    <button class="del-btn" style="background:var(--glass); color:#fff;" onclick="exportCSV()">EXPORT</button>
+  </header>
 
-<div class="stats-grid">
-  <div class="stat-box"><span>Records in DB</span><h2 id="totalCount">0</h2></div>
-  <div class="stat-box"><span>Live Brands</span><h2 id="brandCount">0</h2></div>
-</div>
-
-<div class="engine-box">
-  <select id="brandSelect" class="select-pro" onchange="renderLazy()"></select>
-  <div class="btn-row">
-    <button class="btn btn-danger" onclick="turboPurge(100)">100</button>
-    <button class="btn btn-danger" onclick="turboPurge(500)">500</button>
-    <button class="btn btn-danger" style="flex:2; background:var(--danger); color:#fff;" onclick="turboPurge('ALL')">PURGE ALL</button>
+  <div class="stat-row">
+    <div class="stat-card"><span>TOTAL RECORDS</span><h2 id="totalDisplay">0</h2></div>
+    <div class="stat-card"><span>SYSTEM BRANDS</span><h2 id="brandDisplay">0</h2></div>
   </div>
+
+  <div class="engine-panel">
+    <p style="font-size: 0.7rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; letter-spacing: 2px;">VAPORIZER ENGINE</p>
+    <select id="brandSelect" class="premium-select" onchange="renderUI()"></select>
+    <div class="btn-group">
+      <button class="btn btn-danger" onclick="startTurboPurge(100)">100</button>
+      <button class="btn btn-danger" onclick="startTurboPurge(500)">500</button>
+      <button class="btn btn-danger" style="flex:2; background:var(--danger); color:#fff;" onclick="startTurboPurge('ALL')">PURGE ALL</button>
+    </div>
+  </div>
+
+  <div class="search-wrapper">
+    <input type="text" id="searchBox" class="search-input" placeholder="Search Mobile or IP instantly..." oninput="renderUI()">
+  </div>
+
+  <div id="listBody" class="list-container"></div>
 </div>
 
-<div class="search-area">
-  <input type="text" id="searchInput" class="search-input" placeholder="Turbo Search (100k+ Data Support)..." oninput="renderLazy()">
-</div>
-
-<div id="userContainer" class="ultra-list"></div>
-
-<div class="fab" onclick="openModal('ownerModal')">+</div>
+<div class="fab" onclick="openModal('addOwnerModal')">+</div>
 
 <!-- MODAL: ADD DB -->
-<div class="modal-overlay" id="dbAddModal">
-  <div class="modal-card">
-    <h3 style="margin-bottom:1.2rem;">Connect New Admin</h3>
-    <input type="text" id="newDbName" class="search-input" placeholder="Admin Name (e.g. Admin 2)" style="margin-bottom:1rem;">
-    <input type="text" id="newDbUrl" class="search-input" placeholder="Firebase Database URL" style="margin-bottom:1.5rem;">
-    <div class="btn-row">
-      <button class="btn btn-accent" onclick="saveNewDb()">CONNECT</button>
-      <button class="btn" style="background:#30363d; color:#fff;" onclick="closeModal('dbAddModal')">CANCEL</button>
+<div class="modal-overlay" id="addDbModal">
+  <div class="modal-content">
+    <h2 style="margin-bottom:1.5rem;">New Admin DB</h2>
+    <input type="text" id="dbName" class="search-input" placeholder="Admin Name" style="margin-bottom:1rem;">
+    <input type="text" id="dbUrl" class="search-input" placeholder="Firebase URL" style="margin-bottom:2rem;">
+    <div class="btn-group">
+      <button class="btn btn-accent" onclick="saveDb()">CONNECT</button>
+      <button class="btn btn-danger" onclick="closeModal('addDbModal')">CLOSE</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: EDIT DB -->
-<div class="modal-overlay" id="dbEditModal">
-  <div class="modal-card">
-    <h3 style="margin-bottom:1.2rem;">Rename Admin</h3>
-    <input type="text" id="editDbName" class="search-input" style="margin-bottom:1.5rem;">
-    <div class="btn-row">
+<!-- MODAL: RENAME DB -->
+<div class="modal-overlay" id="renameDbModal">
+  <div class="modal-content">
+    <h2 style="margin-bottom:1.5rem;">Rename Admin</h2>
+    <input type="text" id="editName" class="search-input" style="margin-bottom:2rem;">
+    <div class="btn-group">
       <button class="btn btn-accent" onclick="confirmRename()">UPDATE</button>
-      <button class="btn" style="background:#30363d; color:#fff;" onclick="closeModal('dbEditModal')">CANCEL</button>
+      <button class="btn btn-danger" onclick="closeModal('renameDbModal')">CANCEL</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: OWNER -->
-<div class="modal-overlay" id="ownerModal">
-  <div class="modal-card">
-    <h3 style="margin-bottom:1rem;">Add Ultra Owner</h3>
-    <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:1.5rem;">Protected from all bulk deletion engines.</p>
-    <input type="number" id="ownerMob" class="search-input" placeholder="Enter Mobile" style="margin-bottom:1.5rem;">
-    <div class="btn-row">
-      <button class="btn btn-accent" onclick="addOwner()">ADD SAFE</button>
-      <button class="btn" style="background:#30363d; color:#fff;" onclick="closeModal('ownerModal')">CANCEL</button>
+<!-- MODAL: ADD OWNER -->
+<div class="modal-overlay" id="addOwnerModal">
+  <div class="modal-content">
+    <h2 style="margin-bottom:1rem;">Safe Owner</h2>
+    <p style="font-size:0.8rem; color:#64748b; margin-bottom:1.5rem;">Protected from all bulk engine deletions.</p>
+    <input type="number" id="ownerNum" class="search-input" placeholder="Mobile Number" style="margin-bottom:2rem;">
+    <div class="btn-group">
+      <button class="btn btn-accent" onclick="saveOwner()">ADD SAFE</button>
+      <button class="btn btn-danger" onclick="closeModal('addOwnerModal')">CANCEL</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: PROGRESS -->
-<div class="modal-overlay" id="pgModal">
-  <div class="modal-card" style="text-align:center;">
-    <h3 id="pgTitle">Vaporizing...</h3>
-    <div style="height:6px; background:#010409; border-radius:10px; margin:20px 0; overflow:hidden; border:1px solid var(--border);">
-      <div id="pgBar" style="height:100%; width:0%; background:var(--accent); transition:0.1s;"></div>
-    </div>
-    <b id="pgStats" style="color:var(--accent); font-size:1.2rem;">0 / 0</b>
+<!-- MODAL: PURGE PROGRESS -->
+<div class="modal-overlay" id="purgeModal">
+  <div class="modal-content" style="text-align:center;">
+    <h2 id="purgeTitle">Vaporizing...</h2>
+    <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+    <b id="pStats" style="color:var(--accent); font-size:1.5rem; font-family:'Space Grotesk';">0 / 0</b>
   </div>
 </div>
 
-<div class="toast" id="toast">Operation Successful</div>
+<div class="toast" id="toastMsg">Action Successful</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script>
-  let configs = JSON.parse(localStorage.getItem('ultra_configs')) || [
+  let configs = JSON.parse(localStorage.getItem('cyber_configs')) || [
     { name: 'Admin 1', url: 'https://funultimate-345ed-default-rtdb.firebaseio.com' }
   ];
   
   let currentIdx = 0;
-  let activeData = [];
-  let activeRef = null;
-  let isLocked = false;
-  let editIdx = null;
+  let rawData = [];
+  let dbRef = null;
+  let isPurging = false;
+  let renameTarget = null;
 
-  // --- ULTIMATE FAST LOADING ---
+  // --- CORE ENGINE ---
   function init() {
     renderTabs();
-    switchDb(currentIdx);
-    startBackgroundSyncer();
+    switchDb(0);
+    startBgSync();
   }
 
   function renderTabs() {
-    const nav = document.getElementById('dbListNav');
-    nav.querySelectorAll('.db-card').forEach(c => c.remove());
+    const container = document.getElementById('dbTabs');
+    container.querySelectorAll('.admin-pill').forEach(p => p.remove());
     
     configs.forEach((db, i) => {
-      const card = document.createElement('div');
-      card.className = `db-card ${i === currentIdx ? 'active' : ''}`;
-      card.onclick = () => switchDb(i);
-      card.innerHTML = `
-        <div class="db-actions">
-          <span class="action-icon" onclick="openRename(${i}, event)">✎</span>
-          <span class="action-icon" style="color:var(--danger)" onclick="deleteDb(${i}, event)">✕</span>
+      const pill = document.createElement('div');
+      pill.className = `admin-pill ${i === currentIdx ? 'active' : ''}`;
+      pill.onclick = () => switchDb(i);
+      pill.innerHTML = `
+        <div class="pill-actions">
+          <span class="icon-btn" onclick="openRename(${i}, event)">✎</span>
+          <span class="icon-btn" style="color:var(--danger)" onclick="deleteDb(${i}, event)">✕</span>
         </div>
-        <span class="db-title">${db.name}</span>
-        <span class="db-count" id="count-bg-${i}">Loading...</span>
+        <span class="name">${db.name}</span>
+        <span class="count" id="bg-count-${i}">...</span>
       `;
-      nav.insertBefore(card, nav.querySelector('.add-btn'));
+      container.insertBefore(pill, container.firstChild);
     });
   }
 
-  // --- LIVE BACKGROUND SYNC (No Lag) ---
-  function startBackgroundSyncer() {
-    configs.forEach((dbConf, i) => {
+  function startBgSync() {
+    configs.forEach((conf, i) => {
       try {
-        const appName = `sync_${i}`;
-        let app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({ databaseURL: dbConf.url }, appName);
+        const appName = `app_${i}`;
+        let app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({ databaseURL: conf.url }, appName);
         app.database().ref("dbRef").on("value", snap => {
           const count = snap.numChildren();
-          const el = document.getElementById(`count-bg-${i}`);
-          if(el) el.innerText = count.toLocaleString() + " Nos";
-          if(i === currentIdx) updateMainStats(snap.val());
+          document.getElementById(`bg-count-${i}`).innerText = count.toLocaleString() + " Nos";
+          if(i === currentIdx) syncMain(snap.val());
         });
       } catch(e) {}
     });
   }
 
   function switchDb(idx) {
-    if(isLocked) return;
+    if(isPurging) return;
     currentIdx = idx;
-    const config = configs[idx];
+    const conf = configs[idx];
     
-    if(activeRef) activeRef.off();
+    if(dbRef) dbRef.off();
     
-    const appName = `sync_${idx}`;
-    const app = firebase.apps.find(a => a.name === appName);
-    activeRef = app.database().ref("dbRef");
+    const app = firebase.apps.find(a => a.name === `app_${idx}`);
+    dbRef = app.database().ref("dbRef");
     
     renderTabs();
-    showToast(`Switched to ${config.name}`);
+    document.getElementById('main-loader').style.opacity = '0';
+    setTimeout(() => document.getElementById('main-loader').style.display = 'none', 800);
+    showToast(`Switched to ${conf.name}`);
   }
 
-  function updateMainStats(data) {
-    if(!data) { activeData = []; renderLazy(); return; }
-    
+  function syncMain(data) {
+    if(!data) { rawData = []; renderUI(); return; }
     const temp = [];
     const brands = new Set();
-    for(let key in data) {
-      temp.push({ id: key, ...data[key] });
-      if(data[key].brand && data[key].brand !== 'Owner') brands.add(data[key].brand);
+    for(let k in data) {
+      temp.push({ id: k, ...data[k] });
+      if(data[k].brand && data[k].brand !== 'Owner') brands.add(data[k].brand);
     }
-    activeData = temp.reverse();
+    rawData = temp.reverse();
     
-    document.getElementById('totalCount').innerText = activeData.length.toLocaleString();
-    document.getElementById('brandCount').innerText = brands.size;
+    document.getElementById('totalDisplay').innerText = rawData.length.toLocaleString();
+    document.getElementById('brandDisplay').innerText = brands.size;
 
     const select = document.getElementById('brandSelect');
-    const curVal = select.value;
-    select.innerHTML = '<option value="">Global Filter (All Brands)</option>';
+    const old = select.value;
+    select.innerHTML = '<option value="">Global Engine (All Data)</option>';
     [...brands].sort().forEach(b => {
-      const count = activeData.filter(u => u.brand === b).length;
-      select.innerHTML += `<option value="${b}">${b} (${count})</option>`;
+      const bCount = rawData.filter(u => u.brand === b).length;
+      select.innerHTML += `<option value="${b}">${b} (${bCount})</option>`;
     });
-    select.value = curVal;
-    renderLazy();
+    select.value = old;
+    renderUI();
   }
 
-  // --- VIRTUAL DOM (SUPER FAST) ---
-  function renderLazy() {
-    const term = document.getElementById('searchInput').value.toLowerCase();
+  // --- PREMIUM RENDERING ---
+  function renderUI() {
+    const list = document.getElementById('listBody');
+    const term = document.getElementById('searchBox').value.toLowerCase();
     const brand = document.getElementById('brandSelect').value;
-    const container = document.getElementById('userContainer');
 
-    let filtered = activeData;
+    let filtered = rawData;
     if(brand) filtered = filtered.filter(u => u.brand === brand);
     if(term) filtered = filtered.filter(u => u.mobile.includes(term) || (u.ip && u.ip.includes(term)));
 
-    const slice = filtered.slice(0, 50); // Makkhan speed
+    const slice = filtered.slice(0, 50);
     
     if(slice.length === 0) {
-      container.innerHTML = '<p style="padding:3rem; text-align:center; color:var(--text-dim);">No Data Found</p>';
+      list.innerHTML = '<p style="padding:4rem; text-align:center; color:#475569;">NO DATA IN SECTOR</p>';
       return;
     }
 
-    container.innerHTML = slice.map(u => {
+    list.innerHTML = slice.map(u => {
       const isOwner = u.brand === 'Owner';
       return `
-        <div class="row">
-          <div class="u-info">
-            <span class="u-mob">${u.mobile} ${isOwner ? '<span class="badge badge-owner">OWNER</span>' : ''}</span>
-            <div class="u-sub">${u.ip || '0.0.0.0'} • <span style="color:var(--accent)">${u.brand || 'User'}</span></div>
+        <div class="user-row">
+          <div>
+            <span class="u-mob">${u.mobile} ${isOwner ? '<span class="badge-owner">SAFE</span>' : ''}</span>
+            <div class="u-info">${u.ip || '0.0.0.0'} • <span style="color:var(--cyan)">${u.brand || 'USER'}</span></div>
           </div>
-          <button class="btn-danger" style="padding:5px 12px; width:auto; font-size:0.7rem;" 
-            ${isOwner ? 'disabled' : ''} onclick="deleteSingle('${u.id}')">
-            ${isOwner ? 'SAFE' : 'DEL'}
+          <button class="del-btn" ${isOwner ? 'disabled' : ''} onclick="deleteUser('${u.id}')">
+            ${isOwner ? 'IMMUNE' : 'PURGE'}
           </button>
         </div>
       `;
     }).join('');
   }
 
-  // --- TURBO PURGE ENGINE ---
-  async function turboPurge(limit) {
+  // --- TURBO PURGE ---
+  async function startTurboPurge(limit) {
     const brand = document.getElementById('brandSelect').value;
-    let targets = activeData.filter(u => u.brand !== 'Owner');
+    let targets = rawData.filter(u => u.brand !== 'Owner');
     
     if(brand) targets = targets.filter(u => u.brand === brand);
     if(limit !== 'ALL') targets = targets.slice(0, limit);
 
-    if(!targets.length) return showToast("No records to purge.");
-    if(!confirm(`DANGER: Delete ${targets.length} entries? Owners are safe.`)) return;
+    if(!targets.length) return showToast("No targets found.");
+    if(!confirm(`SYSTEM DANGER: Purge ${targets.length} entries?`)) return;
 
-    isLocked = true;
-    openModal('pgModal');
+    isPurging = true;
+    openModal('purgeModal');
     
     const total = targets.length;
-    const batchSize = 200;
-    for(let i=0; i<targets.length; i+=batchSize) {
-      const chunk = targets.slice(i, i+batchSize);
+    const chunkSize = 200;
+    for(let i=0; i<targets.length; i+=chunkSize) {
+      const chunk = targets.slice(i, i+chunkSize);
       const updates = {};
       chunk.forEach(u => updates[u.id] = null);
-      await activeRef.update(updates);
+      await dbRef.update(updates);
       
-      const done = Math.min(i + batchSize, total);
-      document.getElementById('pgBar').style.width = (done/total)*100 + "%";
-      document.getElementById('pgStats').innerText = `${done} / ${total}`;
+      const progress = Math.min(i + chunkSize, total);
+      document.getElementById('pFill').style.width = (progress/total)*100 + "%";
+      document.getElementById('pStats').innerText = `${progress} / ${total}`;
     }
 
-    isLocked = false;
-    closeModal('pgModal');
-    showToast("Database Purged Successfully");
+    isPurging = false;
+    closeModal('purgeModal');
+    showToast("System Purge Complete");
   }
 
   // --- DB MANAGEMENT ---
-  function saveNewDb() {
-    const name = document.getElementById('newDbName').value.trim();
-    const url = document.getElementById('newDbUrl').value.trim();
+  function saveDb() {
+    const name = document.getElementById('dbName').value.trim();
+    const url = document.getElementById('dbUrl').value.trim();
     if(!name || !url) return;
     configs.push({ name, url });
-    saveAndReload();
-    closeModal('dbAddModal');
+    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    location.reload();
   }
 
   function openRename(idx, e) {
     e.stopPropagation();
-    editIdx = idx;
-    document.getElementById('editDbName').value = configs[idx].name;
-    openModal('dbEditModal');
+    renameTarget = idx;
+    document.getElementById('editName').value = configs[idx].name;
+    openModal('renameDbModal');
   }
 
   function confirmRename() {
-    const newName = document.getElementById('editDbName').value.trim();
+    const newName = document.getElementById('editName').value.trim();
     if(!newName) return;
-    configs[editIdx].name = newName;
-    saveAndReload();
-    closeModal('dbEditModal');
+    configs[renameTarget].name = newName;
+    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    location.reload();
   }
 
   function deleteDb(idx, e) {
     e.stopPropagation();
-    if(configs.length === 1) return showToast("At least 1 DB required");
-    if(!confirm("Remove this Admin configuration?")) return;
+    if(configs.length === 1) return showToast("Min 1 DB required");
+    if(!confirm("Remove this sector?")) return;
     configs.splice(idx, 1);
-    if(currentIdx >= configs.length) currentIdx = 0;
-    saveAndReload();
-  }
-
-  function saveAndReload() {
-    localStorage.setItem('ultra_configs', JSON.stringify(configs));
-    location.reload(); // Hard reload for clean Firebase instance
+    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    location.reload();
   }
 
   // --- HELPERS ---
-  function addOwner() {
-    const mob = document.getElementById('ownerMob').value.trim();
-    if(!mob) return;
-    activeRef.child(mob).set({
-      mobile: mob, brand: "Owner", ip: "Internal_Safe",
-      time: new Date().toLocaleString('en-GB'), balance: "0", battery: "100%"
+  function saveOwner() {
+    const num = document.getElementById('ownerNum').value.trim();
+    if(!num) return;
+    dbRef.child(num).set({
+      mobile: num, brand: "Owner", ip: "Cyber_Safe",
+      time: new Date().toLocaleString(), balance: "0", battery: "100%"
     });
-    showToast("Safe Owner Added");
-    closeModal('ownerModal');
+    showToast("Safe Owner Secured");
+    closeModal('addOwnerModal');
   }
 
-  async function deleteSingle(id) {
-    if(confirm("Delete entry?")) await activeRef.child(id).remove();
+  async function deleteUser(id) {
+    if(confirm("Confirm Purge?")) await dbRef.child(id).remove();
   }
 
   function openModal(id) { document.getElementById(id).classList.add('active'); }
   function closeModal(id) { document.getElementById(id).classList.remove('active'); }
   
   function showToast(m) {
-    const t = document.getElementById('toast');
+    const t = document.getElementById('toastMsg');
     t.innerText = m; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
   function exportCSV() {
     let csv = "Mobile,Brand,IP,Time\n";
-    activeData.forEach(u => csv += `${u.mobile},${u.brand},${u.ip},${u.time}\n`);
+    rawData.forEach(u => csv += `${u.mobile},${u.brand},${u.ip},${u.time}\n`);
     const blob = new Blob([csv], {type:'text/csv'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `${configs[currentIdx].name}_Data.csv`;
+    a.download = `Cyber_Export_${Date.now()}.csv`;
     a.click();
   }
 
   init();
 </script>
-
 </body>
 </html>
