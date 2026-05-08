@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>💎 CYBER ADMIN | ULTIMATE PRE-MAX</title>
+  <title>💎 CYBER ADMIN | V4 FIXED</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap');
@@ -13,7 +13,6 @@
       --glass: rgba(255, 255, 255, 0.03);
       --glass-border: rgba(255, 255, 255, 0.1);
       --accent: #8b5cf6;
-      --accent-glow: #6d28d9;
       --cyan: #06b6d4;
       --danger: #ff4d4d;
       --text: #e2e8f0;
@@ -29,11 +28,10 @@
       min-height: 100vh;
     }
 
-    /* --- PREMIUM LOADER --- */
+    /* --- LOADER --- */
     #main-loader {
       position: fixed; inset: 0; background: var(--bg); z-index: 10000;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      transition: 0.5s ease-out;
     }
     .loader-glow {
       width: 50px; height: 50px; border: 3px solid var(--glass-border);
@@ -43,12 +41,11 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* --- TOP NAV TABS --- */
+    /* --- TOP NAV --- */
     .top-nav {
       position: sticky; top: 0; z-index: 1000;
-      padding: 1rem; background: rgba(3, 0, 10, 0.7);
-      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem; background: rgba(3, 0, 10, 0.8);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
       display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
     }
     .top-nav::-webkit-scrollbar { display: none; }
@@ -56,14 +53,11 @@
     .admin-pill {
       background: var(--glass); border: 1px solid var(--glass-border);
       padding: 0.7rem 1.2rem; border-radius: 18px; min-width: 140px;
-      position: relative; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0;
-      cursor: pointer;
+      position: relative; transition: 0.3s; flex-shrink: 0; cursor: pointer;
     }
     .admin-pill.active {
-      background: rgba(139, 92, 246, 0.2);
-      border-color: var(--accent);
+      background: rgba(139, 92, 246, 0.2); border-color: var(--accent);
       box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-      transform: scale(1.05);
     }
     .admin-pill .name { font-weight: 800; font-size: 0.9rem; color: #fff; display: block; }
     .admin-pill .count { font-size: 0.75rem; color: var(--cyan); font-weight: 700; font-family: 'Space Grotesk'; }
@@ -72,27 +66,19 @@
     .admin-pill:hover .pill-actions { opacity: 1; }
     .icon-btn { font-size: 0.75rem; color: #fff; background: #000; padding: 2px 6px; border-radius: 6px; }
 
-    /* --- DASHBOARD ELEMENTS --- */
-    .container { padding: 1.5rem; }
-    .logo-header { 
-      font-family: 'Space Grotesk'; font-weight: 800; font-size: 1.6rem;
-      background: linear-gradient(to right, #fff, var(--cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
-    }
+    /* --- MAIN CONTENT --- */
+    .container { padding: 1.5rem; max-width: 800px; margin: 0 auto; }
+    .logo-header { font-family: 'Space Grotesk'; font-weight: 800; font-size: 1.6rem; margin-bottom: 1.5rem; color: #fff; }
 
     .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-    .stat-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      padding: 1.2rem; border-radius: 22px; backdrop-filter: blur(10px);
-    }
-    .stat-card span { font-size: 0.65rem; color: var(--text-dim); letter-spacing: 1.5px; font-weight: 700; }
+    .stat-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 1.2rem; border-radius: 22px; }
+    .stat-card span { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
     .stat-card h2 { font-size: 1.8rem; font-family: 'Space Grotesk'; color: #fff; margin-top: 5px; }
 
     /* --- ENGINE PANEL --- */
     .engine-panel {
-      background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
-      border: 1px solid var(--glass-border); border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border);
+      border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem;
     }
     .custom-select {
       width: 100%; background: #05000a; border: 1px solid var(--glass-border);
@@ -100,44 +86,32 @@
     }
 
     .btn-group { display: flex; gap: 10px; }
-    .btn {
-      padding: 1rem; border-radius: 16px; border: none; font-weight: 800;
-      cursor: pointer; transition: 0.3s; flex: 1;
-    }
+    .btn { padding: 1rem; border-radius: 16px; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; flex: 1; }
     .btn-danger { background: rgba(255, 77, 77, 0.1); color: var(--danger); border: 1px solid rgba(255, 77, 77, 0.2); }
-    .btn-danger:active { background: var(--danger); color: #fff; }
-    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
+    .btn-accent { background: var(--accent); color: #fff; }
 
-    /* --- SEARCH & LIST --- */
     .search-input {
       width: 100%; background: var(--glass); border: 1px solid var(--glass-border);
       padding: 1.2rem; border-radius: 18px; color: #fff; margin-bottom: 1.5rem; outline: none;
     }
-    .search-input:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); }
 
     .list-box { border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-border); overflow: hidden; }
     .user-row {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem; border-bottom: 1px solid var(--glass-border);
-      animation: fadeIn 0.4s ease forwards;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    
     .u-mob { font-weight: 700; font-size: 1.1rem; color: #fff; }
     .u-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
     .badge-owner { background: var(--owner); color: #000; font-size: 0.6rem; font-weight: 900; padding: 2px 6px; border-radius: 5px; margin-left: 5px; vertical-align: middle; }
 
     /* --- MODALS --- */
     .modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9);
       backdrop-filter: blur(15px); display: none; align-items: center;
       justify-content: center; z-index: 5000; padding: 1.2rem;
     }
     .modal.active { display: flex; }
-    .modal-card {
-      background: #0a0a0f; border: 1px solid var(--glass-border);
-      padding: 2.2rem; border-radius: 32px; width: 100%; max-width: 400px;
-    }
+    .modal-card { background: #0a0a0f; border: 1px solid var(--glass-border); padding: 2.2rem; border-radius: 32px; width: 100%; max-width: 400px; }
 
     .fab {
       position: fixed; bottom: 30px; right: 20px;
@@ -150,29 +124,30 @@
     .toast {
       position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
       background: var(--cyan); color: #000; padding: 0.8rem 1.5rem;
-      border-radius: 14px; font-weight: 800; z-index: 9999; transition: 0.5s;
+      border-radius: 12px; font-weight: 800; z-index: 9999; transition: 0.5s;
     }
     .toast.show { top: 20px; }
   </style>
 </head>
 <body>
 
-<div id="main-loader"><div class="loader-glow"></div></div>
+<!-- LOADER -->
+<div id="main-loader"><div class="loader-glow"></div><p style="margin-top:15px; font-size:0.8rem; color:var(--cyan);">CONNECTING ENGINE...</p></div>
 
+<!-- TABS -->
 <div class="top-nav" id="dbTabs">
-  <button class="btn btn-accent" style="width:auto; padding:0 18px; border-radius:15px; flex:none;" onclick="openModal('addDbModal')">+</button>
+  <button class="btn btn-accent" style="width:auto; padding:0 20px; border-radius:15px;" onclick="openModal('addDbModal')">+</button>
 </div>
 
 <div class="container">
   <div class="logo-header">CYBER ADMIN PRO</div>
 
   <div class="stats-row">
-    <div class="stat-card"><span>DATABASE RECORDS</span><h2 id="totalCount">0</h2></div>
-    <div class="stat-card"><span>ACTIVE BRANDS</span><h2 id="brandCount">0</h2></div>
+    <div class="stat-card"><span>TOTAL RECORDS</span><h2 id="totalCount">0</h2></div>
+    <div class="stat-card"><span>BRANDS</span><h2 id="brandCount">0</h2></div>
   </div>
 
   <div class="engine-panel">
-    <p style="font-size: 0.7rem; font-weight: 800; color: var(--cyan); margin-bottom: 12px; letter-spacing: 2px;">VAPORIZER BATCH SYSTEM</p>
     <select id="brandSelect" class="custom-select" onchange="renderUI()"></select>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="startPurge(100)">100</button>
@@ -181,7 +156,7 @@
     </div>
   </div>
 
-  <input type="text" id="searchBox" class="search-input" placeholder="Instant Turbo Search..." oninput="renderUI()">
+  <input type="text" id="searchBox" class="search-input" placeholder="Search Mobile..." oninput="renderUI()">
 
   <div id="userList" class="list-box"></div>
 </div>
@@ -191,12 +166,12 @@
 <!-- MODAL: ADD DB -->
 <div class="modal" id="addDbModal">
   <div class="modal-card">
-    <h2 style="margin-bottom:1.5rem; font-family:'Space Grotesk';">Add New Sector</h2>
-    <input type="text" id="dbName" class="search-input" placeholder="Admin Name" style="margin-bottom:10px;">
-    <input type="text" id="dbUrl" class="search-input" placeholder="Firebase URL" style="margin-bottom:1.5rem;">
+    <h2 style="margin-bottom:1.5rem;">Add New Database</h2>
+    <input type="text" id="dbName" class="search-input" placeholder="Admin Name">
+    <input type="text" id="dbUrl" class="search-input" placeholder="Firebase URL">
     <div class="btn-group">
       <button class="btn btn-accent" onclick="saveDb()">CONNECT</button>
-      <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('addDbModal')">CANCEL</button>
+      <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('addDbModal')">CLOSE</button>
     </div>
   </div>
 </div>
@@ -204,8 +179,8 @@
 <!-- MODAL: RENAME DB -->
 <div class="modal" id="renameModal">
   <div class="modal-card">
-    <h2 style="margin-bottom:1.5rem; font-family:'Space Grotesk';">Rename Sector</h2>
-    <input type="text" id="editName" class="search-input" style="margin-bottom:1.5rem;">
+    <h2 style="margin-bottom:1.5rem;">Rename Admin</h2>
+    <input type="text" id="editName" class="search-input">
     <div class="btn-group">
       <button class="btn btn-accent" onclick="confirmRename()">UPDATE</button>
       <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('renameModal')">CANCEL</button>
@@ -216,9 +191,8 @@
 <!-- MODAL: ADD OWNER -->
 <div class="modal" id="addOwnerModal">
   <div class="modal-card">
-    <h2 style="margin-bottom:1rem; font-family:'Space Grotesk';">Add Safe Owner</h2>
-    <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:1.5rem;">Protected from all bulk deletions.</p>
-    <input type="number" id="ownerMob" class="search-input" placeholder="Mobile Number" style="margin-bottom:1.5rem;">
+    <h2 style="margin-bottom:1rem;">Add Safe Owner</h2>
+    <input type="number" id="ownerMob" class="search-input" placeholder="Mobile Number">
     <div class="btn-group">
       <button class="btn btn-accent" onclick="saveOwner()">ADD OWNER</button>
       <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('addOwnerModal')">CANCEL</button>
@@ -229,11 +203,11 @@
 <!-- MODAL: PROGRESS -->
 <div class="modal" id="progressModal">
   <div class="modal-card" style="text-align:center;">
-    <h2 id="pgTitle" style="font-family:'Space Grotesk';">Vaporizing...</h2>
+    <h2 id="pgTitle">Purging...</h2>
     <div style="height:6px; background:#000; border-radius:10px; margin:20px 0; overflow:hidden;">
-      <div id="pgBar" style="height:100%; width:0%; background:var(--cyan); box-shadow:0 0 15px var(--cyan); transition:0.2s;"></div>
+      <div id="pgBar" style="height:100%; width:0%; background:var(--cyan); transition:0.2s;"></div>
     </div>
-    <b id="pgStats" style="color:var(--cyan); font-size:1.5rem; font-family:'Space Grotesk';">0 / 0</b>
+    <b id="pgStats" style="color:var(--cyan); font-size:1.5rem;">0 / 0</b>
   </div>
 </div>
 
@@ -243,7 +217,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script>
-  let configs = JSON.parse(localStorage.getItem('cyber_v3')) || [
+  let configs = JSON.parse(localStorage.getItem('cyber_v4')) || [
     { name: 'Admin 1', url: 'https://funultimate-345ed-default-rtdb.firebaseio.com' }
   ];
   
@@ -253,14 +227,21 @@
   let isPurging = false;
   let editTarget = null;
 
-  // --- START ENGINE ---
+  // --- HIDE LOADER FAILSAFE ---
+  setTimeout(() => {
+    const loader = document.getElementById('main-loader');
+    if(loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 500);
+    }
+  }, 4000); // 4 Seconds max loading
+
   function init() {
     renderTabs();
     switchDb(0);
     syncBackground();
   }
 
-  // Pehle Tabs Render Honge (Anti-Loading Logic)
   function renderTabs() {
     const container = document.getElementById('dbTabs');
     container.querySelectorAll('.admin-pill').forEach(p => p.remove());
@@ -275,13 +256,12 @@
           <span class="icon-btn" style="color:var(--danger)" onclick="deleteDb(${i}, event)">✕</span>
         </div>
         <span class="name">${db.name}</span>
-        <span class="count" id="count-pill-${i}">Wait...</span>
+        <span class="count" id="count-pill-${i}">0 Nos</span>
       `;
       container.insertBefore(pill, container.firstChild);
     });
   }
 
-  // Background Sync for All DBs
   function syncBackground() {
     configs.forEach((conf, i) => {
       try {
@@ -293,45 +273,46 @@
           if(el) el.innerText = count.toLocaleString() + " Nos";
           if(i === currentIdx) updateMain(snap.val());
         });
-      } catch(e) {
-        const el = document.getElementById(`count-pill-${i}`);
-        if(el) el.innerText = "Error";
-      }
+      } catch(e) { console.error("Firebase Error"); }
     });
   }
 
   function switchDb(idx) {
     if(isPurging) return;
     currentIdx = idx;
-    const conf = configs[idx];
     
     if(dbRef) dbRef.off();
     
     const app = firebase.apps.find(a => a.name === `app_${idx}`);
-    dbRef = app.database().ref("dbRef");
+    if(app) {
+      dbRef = app.database().ref("dbRef");
+      renderTabs();
+    }
     
-    renderTabs();
-    document.getElementById('main-loader').style.opacity = '0';
-    setTimeout(() => document.getElementById('main-loader').style.display = 'none', 500);
-    showToast(`Accessing Sector: ${conf.name}`);
+    const loader = document.getElementById('main-loader');
+    if(loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 500);
+    }
   }
 
   function updateMain(data) {
-    if(!data) { rawData = []; renderUI(); return; }
-    const temp = [];
+    rawData = [];
     const brands = new Set();
-    for(let k in data) {
-      temp.push({ id: k, ...data[k] });
-      if(data[k].brand && data[k].brand !== 'Owner') brands.add(data[k].brand);
+    if(data) {
+      for(let k in data) {
+        rawData.push({ id: k, ...data[k] });
+        if(data[k].brand && data[k].brand !== 'Owner') brands.add(data[k].brand);
+      }
     }
-    rawData = temp.reverse();
+    rawData.reverse();
     
     document.getElementById('totalCount').innerText = rawData.length.toLocaleString();
     document.getElementById('brandCount').innerText = brands.size;
 
     const select = document.getElementById('brandSelect');
     const oldVal = select.value;
-    select.innerHTML = '<option value="">Global Engine (All Data)</option>';
+    select.innerHTML = '<option value="">All Brands</option>';
     [...brands].sort().forEach(b => {
       const count = rawData.filter(u => u.brand === b).length;
       select.innerHTML += `<option value="${b}">${b} (${count})</option>`;
@@ -347,122 +328,95 @@
 
     let filtered = rawData;
     if(brand) filtered = filtered.filter(u => u.brand === brand);
-    if(term) filtered = filtered.filter(u => u.mobile.includes(term) || (u.ip && u.ip.includes(term)));
+    if(term) filtered = filtered.filter(u => u.mobile.includes(term));
 
     const slice = filtered.slice(0, 50);
-    
-    if(slice.length === 0) {
-      list.innerHTML = '<p style="padding:4rem; text-align:center; color:var(--text-dim);">NO SECTOR DATA</p>';
-      return;
-    }
-
-    list.innerHTML = slice.map(u => {
-      const isOwner = u.brand === 'Owner';
-      return `
-        <div class="user-row">
-          <div>
-            <span class="u-mob">${u.mobile} ${isOwner ? '<span class="badge-owner">SAFE</span>' : ''}</span>
-            <div class="u-sub">${u.ip || '0.0.0.0'} • <span style="color:var(--cyan)">${u.brand || 'USER'}</span></div>
-          </div>
-          <button class="btn-danger" style="padding:6px 15px; width:auto; font-size:0.75rem;" 
-            ${isOwner ? 'disabled' : ''} onclick="deleteSingle('${u.id}')">
-            ${isOwner ? 'IMMUNE' : 'PURGE'}
-          </button>
+    list.innerHTML = slice.length ? slice.map(u => `
+      <div class="user-row">
+        <div>
+          <span class="u-mob">${u.mobile} ${u.brand === 'Owner' ? '<span class="badge-owner">SAFE</span>' : ''}</span>
+          <div class="u-sub">${u.ip || '0.0.0.0'} • <span style="color:var(--cyan)">${u.brand || 'USER'}</span></div>
         </div>
-      `;
-    }).join('');
+        <button class="btn-danger" style="padding:6px 15px; width:auto;" 
+          ${u.brand === 'Owner' ? 'disabled' : ''} onclick="deleteSingle('${u.id}')">
+          ${u.brand === 'Owner' ? 'SAFE' : 'DEL'}
+        </button>
+      </div>
+    `).join('') : '<p style="padding:4rem; text-align:center; color:var(--text-dim);">NO DATA</p>';
   }
 
-  // --- TURBO PURGE ---
   async function startPurge(limit) {
     const brand = document.getElementById('brandSelect').value;
     let targets = rawData.filter(u => u.brand !== 'Owner');
-    
     if(brand) targets = targets.filter(u => u.brand === brand);
     if(limit !== 'ALL') targets = targets.slice(0, limit);
 
-    if(!targets.length) return showToast("No targets found");
-    if(!confirm(`SYSTEM ALERT: Purge ${targets.length} entries?`)) return;
+    if(!targets.length || !confirm("Purge entries?")) return;
 
     isPurging = true;
     openModal('progressModal');
-    
-    const total = targets.length;
-    const batch = 200;
-    for(let i=0; i<targets.length; i+=batch) {
-      const chunk = targets.slice(i, i+batch);
+    for(let i=0; i<targets.length; i+=100) {
+      const chunk = targets.slice(i, i+100);
       const updates = {};
       chunk.forEach(u => updates[u.id] = null);
       await dbRef.update(updates);
-      
-      const done = Math.min(i + batch, total);
-      document.getElementById('pgBar').style.width = (done/total)*100 + "%";
-      document.getElementById('pgStats').innerText = `${done} / ${total}`;
+      document.getElementById('pgBar').style.width = ((i+chunk.length)/targets.length)*100 + "%";
+      document.getElementById('pgStats').innerText = `${i+chunk.length} / ${targets.length}`;
     }
-
     isPurging = false;
     closeModal('progressModal');
-    showToast("Vaporization Complete");
+    showToast("Purged!");
   }
 
-  // --- ADMIN MANAGEMENT ---
   function saveDb() {
-    const name = document.getElementById('dbName').value.trim();
-    const url = document.getElementById('dbUrl').value.trim();
-    if(!name || !url) return;
-    configs.push({ name, url });
-    localStorage.setItem('cyber_v3', JSON.stringify(configs));
-    location.reload();
+    const n = document.getElementById('dbName').value.trim();
+    const u = document.getElementById('dbUrl').value.trim();
+    if(n && u) {
+      configs.push({ name: n, url: u });
+      localStorage.setItem('cyber_v4', JSON.stringify(configs));
+      location.reload();
+    }
   }
 
   function openRename(idx, e) {
-    e.stopPropagation();
-    editTarget = idx;
+    e.stopPropagation(); editTarget = idx;
     document.getElementById('editName').value = configs[idx].name;
     openModal('renameModal');
   }
 
   function confirmRename() {
     const n = document.getElementById('editName').value.trim();
-    if(!n) return;
-    configs[editTarget].name = n;
-    localStorage.setItem('cyber_v3', JSON.stringify(configs));
-    location.reload();
+    if(n) {
+      configs[editTarget].name = n;
+      localStorage.setItem('cyber_v4', JSON.stringify(configs));
+      location.reload();
+    }
   }
 
   function deleteDb(idx, e) {
     e.stopPropagation();
-    if(configs.length === 1) return showToast("Min 1 Sector Required");
-    if(!confirm("Destroy this sector permanently?")) return;
-    configs.splice(idx, 1);
-    localStorage.setItem('cyber_v3', JSON.stringify(configs));
-    location.reload();
+    if(configs.length > 1 && confirm("Delete DB?")) {
+      configs.splice(idx, 1);
+      localStorage.setItem('cyber_v4', JSON.stringify(configs));
+      location.reload();
+    }
   }
 
-  // --- HELPERS ---
   function saveOwner() {
     const m = document.getElementById('ownerMob').value.trim();
-    if(!m) return;
-    dbRef.child(m).set({
-      mobile: m, brand: "Owner", ip: "Safe_Sector",
-      time: new Date().toLocaleString(), balance: "0", battery: "100%"
-    });
-    showToast("Safe Owner Secured");
-    closeModal('addOwnerModal');
+    if(m && dbRef) {
+      dbRef.child(m).set({ mobile: m, brand: "Owner", ip: "Safe", time: new Date().toLocaleString(), balance: "0", battery: "100%" });
+      showToast("Owner Added"); closeModal('addOwnerModal');
+    }
   }
 
   async function deleteSingle(id) {
-    if(confirm("Confirm Purge?")) await dbRef.child(id).remove();
+    if(confirm("Delete?")) await dbRef.child(id).remove();
   }
 
   function openModal(id) { document.getElementById(id).classList.add('active'); }
   function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-  
-  function showToast(m) {
-    const t = document.getElementById('toast');
-    t.innerText = m; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
+  function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
 
   init();
 </script>
