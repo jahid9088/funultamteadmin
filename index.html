@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>💎 CYBER ADMIN | PREMIUM MAX</title>
+  <title>💎 CYBER ADMIN | ULTIMATE PRE-MAX</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap');
@@ -11,22 +11,21 @@
     :root {
       --bg: #03000a;
       --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --accent: #8b5cf6;
       --accent-glow: #6d28d9;
       --cyan: #06b6d4;
       --danger: #ff4d4d;
       --text: #e2e8f0;
+      --text-dim: #94a3b8;
       --owner: #fbbf24;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
     
     body { 
-      background: var(--bg); 
-      color: var(--text); 
-      overflow-x: hidden;
-      background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #03000a 100%);
+      background: var(--bg); color: var(--text); overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #03000a 70%);
       min-height: 100vh;
     }
 
@@ -34,232 +33,217 @@
     #main-loader {
       position: fixed; inset: 0; background: var(--bg); z-index: 10000;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: 0.5s ease-out;
     }
-    .cyber-ring {
-      width: 60px; height: 60px; border: 2px solid var(--glass-border);
-      border-top: 2px solid var(--accent); border-radius: 50%;
-      animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      box-shadow: 0 0 15px var(--accent-glow);
+    .loader-glow {
+      width: 50px; height: 50px; border: 3px solid var(--glass-border);
+      border-top: 3px solid var(--cyan); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      box-shadow: 0 0 15px var(--cyan);
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* --- CYBER TOP BAR --- */
+    /* --- TOP NAV TABS --- */
     .top-nav {
       position: sticky; top: 0; z-index: 1000;
-      padding: 1rem; background: rgba(3, 0, 10, 0.6);
-      backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
-      display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none;
+      padding: 1rem; background: rgba(3, 0, 10, 0.7);
+      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--glass-border);
+      display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
     }
     .top-nav::-webkit-scrollbar { display: none; }
 
     .admin-pill {
       background: var(--glass); border: 1px solid var(--glass-border);
-      padding: 0.6rem 1.2rem; border-radius: 16px; min-width: 130px;
-      position: relative; transition: 0.4s; flex-shrink: 0;
+      padding: 0.7rem 1.2rem; border-radius: 18px; min-width: 140px;
+      position: relative; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0;
+      cursor: pointer;
     }
     .admin-pill.active {
-      background: rgba(139, 92, 246, 0.15);
+      background: rgba(139, 92, 246, 0.2);
       border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+      transform: scale(1.05);
     }
-    .admin-pill .name { font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 2px; }
-    .admin-pill .count { font-size: 0.7rem; color: var(--cyan); font-weight: 600; font-family: 'Space Grotesk'; }
+    .admin-pill .name { font-weight: 800; font-size: 0.9rem; color: #fff; display: block; }
+    .admin-pill .count { font-size: 0.75rem; color: var(--cyan); font-weight: 700; font-family: 'Space Grotesk'; }
     
-    .pill-actions { position: absolute; top: 5px; right: 8px; display: flex; gap: 6px; opacity: 0; transition: 0.3s; }
+    .pill-actions { position: absolute; top: 6px; right: 8px; display: flex; gap: 8px; opacity: 0; }
     .admin-pill:hover .pill-actions { opacity: 1; }
-    .icon-btn { font-size: 0.7rem; color: var(--text); cursor: pointer; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 4px; }
+    .icon-btn { font-size: 0.75rem; color: #fff; background: #000; padding: 2px 6px; border-radius: 6px; }
 
-    /* --- LUXURY CARDS --- */
-    .dashboard { padding: 1.5rem; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .logo-glow { 
-      font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.5rem;
-      background: linear-gradient(to right, #fff, var(--accent));
+    /* --- DASHBOARD ELEMENTS --- */
+    .container { padding: 1.5rem; }
+    .logo-header { 
+      font-family: 'Space Grotesk'; font-weight: 800; font-size: 1.6rem;
+      background: linear-gradient(to right, #fff, var(--cyan));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+      margin-bottom: 1.5rem;
     }
 
-    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
     .stat-card {
       background: var(--glass); border: 1px solid var(--glass-border);
-      padding: 1.2rem; border-radius: 24px; backdrop-filter: blur(10px);
-      transition: 0.3s;
+      padding: 1.2rem; border-radius: 22px; backdrop-filter: blur(10px);
     }
-    .stat-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
-    .stat-card span { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-    .stat-card h2 { font-size: 1.8rem; font-family: 'Space Grotesk'; margin-top: 5px; color: #fff; }
+    .stat-card span { font-size: 0.65rem; color: var(--text-dim); letter-spacing: 1.5px; font-weight: 700; }
+    .stat-card h2 { font-size: 1.8rem; font-family: 'Space Grotesk'; color: #fff; margin-top: 5px; }
 
-    /* --- ACTION ENGINE --- */
+    /* --- ENGINE PANEL --- */
     .engine-panel {
-      background: rgba(139, 92, 246, 0.05); border: 1px solid var(--glass-border);
-      border-radius: 30px; padding: 1.5rem; margin-bottom: 1.5rem;
+      background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
+      border: 1px solid var(--glass-border); border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem;
     }
-    .premium-select {
-      width: 100%; background: #000; border: 1px solid var(--glass-border);
-      color: #fff; padding: 1rem; border-radius: 15px; margin-bottom: 1.2rem;
-      font-size: 1rem; outline: none; transition: 0.3s;
+    .custom-select {
+      width: 100%; background: #05000a; border: 1px solid var(--glass-border);
+      color: #fff; padding: 1rem; border-radius: 16px; margin-bottom: 1.2rem; outline: none;
     }
-    .premium-select:focus { border-color: var(--accent); }
 
-    .btn-group { display: flex; gap: 0.8rem; }
+    .btn-group { display: flex; gap: 10px; }
     .btn {
-      padding: 1rem; border-radius: 15px; border: none; font-weight: 700;
-      cursor: pointer; transition: 0.3s; flex: 1; font-size: 0.9rem;
+      padding: 1rem; border-radius: 16px; border: none; font-weight: 800;
+      cursor: pointer; transition: 0.3s; flex: 1;
     }
     .btn-danger { background: rgba(255, 77, 77, 0.1); color: var(--danger); border: 1px solid rgba(255, 77, 77, 0.2); }
     .btn-danger:active { background: var(--danger); color: #fff; }
     .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
 
     /* --- SEARCH & LIST --- */
-    .search-wrapper { margin-bottom: 1.2rem; position: sticky; top: 90px; z-index: 900; }
     .search-input {
-      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-      padding: 1.2rem; border-radius: 20px; color: #fff; backdrop-filter: blur(10px);
-      outline: none; transition: 0.3s;
+      width: 100%; background: var(--glass); border: 1px solid var(--glass-border);
+      padding: 1.2rem; border-radius: 18px; color: #fff; margin-bottom: 1.5rem; outline: none;
     }
-    .search-input:focus { background: rgba(255,255,255,0.08); border-color: var(--accent); }
+    .search-input:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); }
 
-    .list-container { border-radius: 28px; overflow: hidden; background: var(--glass); border: 1px solid var(--glass-border); }
+    .list-box { border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-border); overflow: hidden; }
     .user-row {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem; border-bottom: 1px solid var(--glass-border);
-      transition: 0.3s; animation: reveal 0.4s ease-out;
+      animation: fadeIn 0.4s ease forwards;
     }
-    @keyframes reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     
-    .u-mob { font-weight: 700; font-size: 1.1rem; color: #fff; display: block; }
-    .u-info { font-size: 0.8rem; color: #94a3b8; margin-top: 3px; display: flex; align-items: center; gap: 8px; }
-    
-    .badge-owner { background: var(--owner); color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
-    .del-btn { background: rgba(255, 77, 77, 0.1); color: var(--danger); border: none; padding: 8px 15px; border-radius: 10px; font-weight: 700; font-size: 0.75rem; }
+    .u-mob { font-weight: 700; font-size: 1.1rem; color: #fff; }
+    .u-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+    .badge-owner { background: var(--owner); color: #000; font-size: 0.6rem; font-weight: 900; padding: 2px 6px; border-radius: 5px; margin-left: 5px; vertical-align: middle; }
 
     /* --- MODALS --- */
-    .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
       backdrop-filter: blur(15px); display: none; align-items: center;
-      justify-content: center; z-index: 5000; padding: 1.5rem;
+      justify-content: center; z-index: 5000; padding: 1.2rem;
     }
-    .modal-overlay.active { display: flex; }
-    .modal-content {
-      background: #111; border: 1px solid var(--glass-border);
-      padding: 2.5rem; border-radius: 35px; width: 100%; max-width: 400px;
-      animation: modalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .modal.active { display: flex; }
+    .modal-card {
+      background: #0a0a0f; border: 1px solid var(--glass-border);
+      padding: 2.2rem; border-radius: 32px; width: 100%; max-width: 400px;
     }
-    @keyframes modalSlide { from { transform: translateY(30px) scale(0.9); opacity: 0; } }
-
-    .progress-track { height: 8px; background: #000; border-radius: 10px; margin: 20px 0; overflow: hidden; }
-    .progress-fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 15px var(--accent); transition: 0.3s; }
 
     .fab {
-      position: fixed; bottom: 30px; right: 25px;
+      position: fixed; bottom: 30px; right: 20px;
       width: 65px; height: 65px; background: var(--accent);
       border-radius: 22px; display: flex; align-items: center;
       justify-content: center; color: #fff; font-size: 2rem;
-      box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4); z-index: 1000;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4); z-index: 999;
     }
 
     .toast {
       position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: #fff; padding: 1rem 2rem;
-      border-radius: 20px; font-weight: 700; z-index: 9999;
-      transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      background: var(--cyan); color: #000; padding: 0.8rem 1.5rem;
+      border-radius: 14px; font-weight: 800; z-index: 9999; transition: 0.5s;
     }
-    .toast.show { top: 30px; }
+    .toast.show { top: 20px; }
   </style>
 </head>
 <body>
 
-<div id="main-loader"><div class="cyber-ring"></div></div>
+<div id="main-loader"><div class="loader-glow"></div></div>
 
 <div class="top-nav" id="dbTabs">
-  <button class="btn btn-accent" style="width:auto; padding:0 15px; border-radius:15px;" onclick="openModal('addDbModal')">+</button>
+  <button class="btn btn-accent" style="width:auto; padding:0 18px; border-radius:15px; flex:none;" onclick="openModal('addDbModal')">+</button>
 </div>
 
-<div class="dashboard">
-  <header>
-    <div class="logo-glow">CYBER ADMIN PRO</div>
-    <button class="del-btn" style="background:var(--glass); color:#fff;" onclick="exportCSV()">EXPORT</button>
-  </header>
+<div class="container">
+  <div class="logo-header">CYBER ADMIN PRO</div>
 
-  <div class="stat-row">
-    <div class="stat-card"><span>TOTAL RECORDS</span><h2 id="totalDisplay">0</h2></div>
-    <div class="stat-card"><span>SYSTEM BRANDS</span><h2 id="brandDisplay">0</h2></div>
+  <div class="stats-row">
+    <div class="stat-card"><span>DATABASE RECORDS</span><h2 id="totalCount">0</h2></div>
+    <div class="stat-card"><span>ACTIVE BRANDS</span><h2 id="brandCount">0</h2></div>
   </div>
 
   <div class="engine-panel">
-    <p style="font-size: 0.7rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; letter-spacing: 2px;">VAPORIZER ENGINE</p>
-    <select id="brandSelect" class="premium-select" onchange="renderUI()"></select>
+    <p style="font-size: 0.7rem; font-weight: 800; color: var(--cyan); margin-bottom: 12px; letter-spacing: 2px;">VAPORIZER BATCH SYSTEM</p>
+    <select id="brandSelect" class="custom-select" onchange="renderUI()"></select>
     <div class="btn-group">
-      <button class="btn btn-danger" onclick="startTurboPurge(100)">100</button>
-      <button class="btn btn-danger" onclick="startTurboPurge(500)">500</button>
-      <button class="btn btn-danger" style="flex:2; background:var(--danger); color:#fff;" onclick="startTurboPurge('ALL')">PURGE ALL</button>
+      <button class="btn btn-danger" onclick="startPurge(100)">100</button>
+      <button class="btn btn-danger" onclick="startPurge(500)">500</button>
+      <button class="btn btn-danger" style="flex:2; background:var(--danger); color:#fff;" onclick="startPurge('ALL')">PURGE ALL</button>
     </div>
   </div>
 
-  <div class="search-wrapper">
-    <input type="text" id="searchBox" class="search-input" placeholder="Search Mobile or IP instantly..." oninput="renderUI()">
-  </div>
+  <input type="text" id="searchBox" class="search-input" placeholder="Instant Turbo Search..." oninput="renderUI()">
 
-  <div id="listBody" class="list-container"></div>
+  <div id="userList" class="list-box"></div>
 </div>
 
 <div class="fab" onclick="openModal('addOwnerModal')">+</div>
 
 <!-- MODAL: ADD DB -->
-<div class="modal-overlay" id="addDbModal">
-  <div class="modal-content">
-    <h2 style="margin-bottom:1.5rem;">New Admin DB</h2>
-    <input type="text" id="dbName" class="search-input" placeholder="Admin Name" style="margin-bottom:1rem;">
-    <input type="text" id="dbUrl" class="search-input" placeholder="Firebase URL" style="margin-bottom:2rem;">
+<div class="modal" id="addDbModal">
+  <div class="modal-card">
+    <h2 style="margin-bottom:1.5rem; font-family:'Space Grotesk';">Add New Sector</h2>
+    <input type="text" id="dbName" class="search-input" placeholder="Admin Name" style="margin-bottom:10px;">
+    <input type="text" id="dbUrl" class="search-input" placeholder="Firebase URL" style="margin-bottom:1.5rem;">
     <div class="btn-group">
       <button class="btn btn-accent" onclick="saveDb()">CONNECT</button>
-      <button class="btn btn-danger" onclick="closeModal('addDbModal')">CLOSE</button>
+      <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('addDbModal')">CANCEL</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL: RENAME DB -->
-<div class="modal-overlay" id="renameDbModal">
-  <div class="modal-content">
-    <h2 style="margin-bottom:1.5rem;">Rename Admin</h2>
-    <input type="text" id="editName" class="search-input" style="margin-bottom:2rem;">
+<div class="modal" id="renameModal">
+  <div class="modal-card">
+    <h2 style="margin-bottom:1.5rem; font-family:'Space Grotesk';">Rename Sector</h2>
+    <input type="text" id="editName" class="search-input" style="margin-bottom:1.5rem;">
     <div class="btn-group">
       <button class="btn btn-accent" onclick="confirmRename()">UPDATE</button>
-      <button class="btn btn-danger" onclick="closeModal('renameDbModal')">CANCEL</button>
+      <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('renameModal')">CANCEL</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL: ADD OWNER -->
-<div class="modal-overlay" id="addOwnerModal">
-  <div class="modal-content">
-    <h2 style="margin-bottom:1rem;">Safe Owner</h2>
-    <p style="font-size:0.8rem; color:#64748b; margin-bottom:1.5rem;">Protected from all bulk engine deletions.</p>
-    <input type="number" id="ownerNum" class="search-input" placeholder="Mobile Number" style="margin-bottom:2rem;">
+<div class="modal" id="addOwnerModal">
+  <div class="modal-card">
+    <h2 style="margin-bottom:1rem; font-family:'Space Grotesk';">Add Safe Owner</h2>
+    <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:1.5rem;">Protected from all bulk deletions.</p>
+    <input type="number" id="ownerMob" class="search-input" placeholder="Mobile Number" style="margin-bottom:1.5rem;">
     <div class="btn-group">
-      <button class="btn btn-accent" onclick="saveOwner()">ADD SAFE</button>
-      <button class="btn btn-danger" onclick="closeModal('addOwnerModal')">CANCEL</button>
+      <button class="btn btn-accent" onclick="saveOwner()">ADD OWNER</button>
+      <button class="btn" style="background:#222; color:#fff;" onclick="closeModal('addOwnerModal')">CANCEL</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: PURGE PROGRESS -->
-<div class="modal-overlay" id="purgeModal">
-  <div class="modal-content" style="text-align:center;">
-    <h2 id="purgeTitle">Vaporizing...</h2>
-    <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
-    <b id="pStats" style="color:var(--accent); font-size:1.5rem; font-family:'Space Grotesk';">0 / 0</b>
+<!-- MODAL: PROGRESS -->
+<div class="modal" id="progressModal">
+  <div class="modal-card" style="text-align:center;">
+    <h2 id="pgTitle" style="font-family:'Space Grotesk';">Vaporizing...</h2>
+    <div style="height:6px; background:#000; border-radius:10px; margin:20px 0; overflow:hidden;">
+      <div id="pgBar" style="height:100%; width:0%; background:var(--cyan); box-shadow:0 0 15px var(--cyan); transition:0.2s;"></div>
+    </div>
+    <b id="pgStats" style="color:var(--cyan); font-size:1.5rem; font-family:'Space Grotesk';">0 / 0</b>
   </div>
 </div>
 
-<div class="toast" id="toastMsg">Action Successful</div>
+<div class="toast" id="toast">Done</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script>
-  let configs = JSON.parse(localStorage.getItem('cyber_configs')) || [
+  let configs = JSON.parse(localStorage.getItem('cyber_v3')) || [
     { name: 'Admin 1', url: 'https://funultimate-345ed-default-rtdb.firebaseio.com' }
   ];
   
@@ -267,15 +251,16 @@
   let rawData = [];
   let dbRef = null;
   let isPurging = false;
-  let renameTarget = null;
+  let editTarget = null;
 
-  // --- CORE ENGINE ---
+  // --- START ENGINE ---
   function init() {
     renderTabs();
     switchDb(0);
-    startBgSync();
+    syncBackground();
   }
 
+  // Pehle Tabs Render Honge (Anti-Loading Logic)
   function renderTabs() {
     const container = document.getElementById('dbTabs');
     container.querySelectorAll('.admin-pill').forEach(p => p.remove());
@@ -290,23 +275,28 @@
           <span class="icon-btn" style="color:var(--danger)" onclick="deleteDb(${i}, event)">✕</span>
         </div>
         <span class="name">${db.name}</span>
-        <span class="count" id="bg-count-${i}">...</span>
+        <span class="count" id="count-pill-${i}">Wait...</span>
       `;
       container.insertBefore(pill, container.firstChild);
     });
   }
 
-  function startBgSync() {
+  // Background Sync for All DBs
+  function syncBackground() {
     configs.forEach((conf, i) => {
       try {
         const appName = `app_${i}`;
         let app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({ databaseURL: conf.url }, appName);
         app.database().ref("dbRef").on("value", snap => {
           const count = snap.numChildren();
-          document.getElementById(`bg-count-${i}`).innerText = count.toLocaleString() + " Nos";
-          if(i === currentIdx) syncMain(snap.val());
+          const el = document.getElementById(`count-pill-${i}`);
+          if(el) el.innerText = count.toLocaleString() + " Nos";
+          if(i === currentIdx) updateMain(snap.val());
         });
-      } catch(e) {}
+      } catch(e) {
+        const el = document.getElementById(`count-pill-${i}`);
+        if(el) el.innerText = "Error";
+      }
     });
   }
 
@@ -322,11 +312,11 @@
     
     renderTabs();
     document.getElementById('main-loader').style.opacity = '0';
-    setTimeout(() => document.getElementById('main-loader').style.display = 'none', 800);
-    showToast(`Switched to ${conf.name}`);
+    setTimeout(() => document.getElementById('main-loader').style.display = 'none', 500);
+    showToast(`Accessing Sector: ${conf.name}`);
   }
 
-  function syncMain(data) {
+  function updateMain(data) {
     if(!data) { rawData = []; renderUI(); return; }
     const temp = [];
     const brands = new Set();
@@ -336,23 +326,22 @@
     }
     rawData = temp.reverse();
     
-    document.getElementById('totalDisplay').innerText = rawData.length.toLocaleString();
-    document.getElementById('brandDisplay').innerText = brands.size;
+    document.getElementById('totalCount').innerText = rawData.length.toLocaleString();
+    document.getElementById('brandCount').innerText = brands.size;
 
     const select = document.getElementById('brandSelect');
-    const old = select.value;
+    const oldVal = select.value;
     select.innerHTML = '<option value="">Global Engine (All Data)</option>';
     [...brands].sort().forEach(b => {
-      const bCount = rawData.filter(u => u.brand === b).length;
-      select.innerHTML += `<option value="${b}">${b} (${bCount})</option>`;
+      const count = rawData.filter(u => u.brand === b).length;
+      select.innerHTML += `<option value="${b}">${b} (${count})</option>`;
     });
-    select.value = old;
+    select.value = oldVal;
     renderUI();
   }
 
-  // --- PREMIUM RENDERING ---
   function renderUI() {
-    const list = document.getElementById('listBody');
+    const list = document.getElementById('userList');
     const term = document.getElementById('searchBox').value.toLowerCase();
     const brand = document.getElementById('brandSelect').value;
 
@@ -363,7 +352,7 @@
     const slice = filtered.slice(0, 50);
     
     if(slice.length === 0) {
-      list.innerHTML = '<p style="padding:4rem; text-align:center; color:#475569;">NO DATA IN SECTOR</p>';
+      list.innerHTML = '<p style="padding:4rem; text-align:center; color:var(--text-dim);">NO SECTOR DATA</p>';
       return;
     }
 
@@ -373,9 +362,10 @@
         <div class="user-row">
           <div>
             <span class="u-mob">${u.mobile} ${isOwner ? '<span class="badge-owner">SAFE</span>' : ''}</span>
-            <div class="u-info">${u.ip || '0.0.0.0'} • <span style="color:var(--cyan)">${u.brand || 'USER'}</span></div>
+            <div class="u-sub">${u.ip || '0.0.0.0'} • <span style="color:var(--cyan)">${u.brand || 'USER'}</span></div>
           </div>
-          <button class="del-btn" ${isOwner ? 'disabled' : ''} onclick="deleteUser('${u.id}')">
+          <button class="btn-danger" style="padding:6px 15px; width:auto; font-size:0.75rem;" 
+            ${isOwner ? 'disabled' : ''} onclick="deleteSingle('${u.id}')">
             ${isOwner ? 'IMMUNE' : 'PURGE'}
           </button>
         </div>
@@ -384,84 +374,84 @@
   }
 
   // --- TURBO PURGE ---
-  async function startTurboPurge(limit) {
+  async function startPurge(limit) {
     const brand = document.getElementById('brandSelect').value;
     let targets = rawData.filter(u => u.brand !== 'Owner');
     
     if(brand) targets = targets.filter(u => u.brand === brand);
     if(limit !== 'ALL') targets = targets.slice(0, limit);
 
-    if(!targets.length) return showToast("No targets found.");
-    if(!confirm(`SYSTEM DANGER: Purge ${targets.length} entries?`)) return;
+    if(!targets.length) return showToast("No targets found");
+    if(!confirm(`SYSTEM ALERT: Purge ${targets.length} entries?`)) return;
 
     isPurging = true;
-    openModal('purgeModal');
+    openModal('progressModal');
     
     const total = targets.length;
-    const chunkSize = 200;
-    for(let i=0; i<targets.length; i+=chunkSize) {
-      const chunk = targets.slice(i, i+chunkSize);
+    const batch = 200;
+    for(let i=0; i<targets.length; i+=batch) {
+      const chunk = targets.slice(i, i+batch);
       const updates = {};
       chunk.forEach(u => updates[u.id] = null);
       await dbRef.update(updates);
       
-      const progress = Math.min(i + chunkSize, total);
-      document.getElementById('pFill').style.width = (progress/total)*100 + "%";
-      document.getElementById('pStats').innerText = `${progress} / ${total}`;
+      const done = Math.min(i + batch, total);
+      document.getElementById('pgBar').style.width = (done/total)*100 + "%";
+      document.getElementById('pgStats').innerText = `${done} / ${total}`;
     }
 
     isPurging = false;
-    closeModal('purgeModal');
-    showToast("System Purge Complete");
+    closeModal('progressModal');
+    showToast("Vaporization Complete");
   }
 
-  // --- DB MANAGEMENT ---
+  // --- ADMIN MANAGEMENT ---
   function saveDb() {
     const name = document.getElementById('dbName').value.trim();
     const url = document.getElementById('dbUrl').value.trim();
     if(!name || !url) return;
     configs.push({ name, url });
-    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    localStorage.setItem('cyber_v3', JSON.stringify(configs));
     location.reload();
   }
 
   function openRename(idx, e) {
     e.stopPropagation();
-    renameTarget = idx;
+    editTarget = idx;
     document.getElementById('editName').value = configs[idx].name;
-    openModal('renameDbModal');
+    openModal('renameModal');
   }
 
   function confirmRename() {
-    const newName = document.getElementById('editName').value.trim();
-    if(!newName) return;
-    configs[renameTarget].name = newName;
-    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    const n = document.getElementById('editName').value.trim();
+    if(!n) return;
+    configs[editTarget].name = n;
+    localStorage.setItem('cyber_v3', JSON.stringify(configs));
     location.reload();
   }
 
   function deleteDb(idx, e) {
     e.stopPropagation();
-    if(configs.length === 1) return showToast("Min 1 DB required");
-    if(!confirm("Remove this sector?")) return;
+    if(configs.length === 1) return showToast("Min 1 Sector Required");
+    if(!confirm("Destroy this sector permanently?")) return;
     configs.splice(idx, 1);
-    localStorage.setItem('cyber_configs', JSON.stringify(configs));
+    localStorage.setItem('cyber_v3', JSON.stringify(configs));
     location.reload();
   }
 
   // --- HELPERS ---
   function saveOwner() {
-    const num = document.getElementById('ownerNum').value.trim();
-    if(!num) return;
-    dbRef.child(num).set({
-      mobile: num, brand: "Owner", ip: "Cyber_Safe",
+    const m = document.getElementById('ownerMob').value.trim();
+    if(!m) return;
+    dbRef.child(m).set({
+      mobile: m, brand: "Owner", ip: "Safe_Sector",
       time: new Date().toLocaleString(), balance: "0", battery: "100%"
     });
     showToast("Safe Owner Secured");
     closeModal('addOwnerModal');
   }
 
-  async function deleteUser(id) {
+  async function deleteSingle(id) {
     if(confirm("Confirm Purge?")) await dbRef.child(id).remove();
   }
 
@@ -469,19 +459,9 @@
   function closeModal(id) { document.getElementById(id).classList.remove('active'); }
   
   function showToast(m) {
-    const t = document.getElementById('toastMsg');
+    const t = document.getElementById('toast');
     t.innerText = m; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3000);
-  }
-
-  function exportCSV() {
-    let csv = "Mobile,Brand,IP,Time\n";
-    rawData.forEach(u => csv += `${u.mobile},${u.brand},${u.ip},${u.time}\n`);
-    const blob = new Blob([csv], {type:'text/csv'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Cyber_Export_${Date.now()}.csv`;
-    a.click();
   }
 
   init();
